@@ -1,0 +1,66 @@
+#choicesModal {
+    display: block;
+    background: #fff !important;
+}
+
+#scholarsModal {
+    background: #fff !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+#scholarsModalContent {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: rgb(226, 240, 217);
+    background-clip: padding-box;
+    border: rgb(146, 192, 114);
+    border-radius: .3rem;
+    outline: 0
+}
+
+#choicesModalHeader {
+    color: rgb(225, 255, 141);
+    background-color: rgb(54, 214, 44);
+}
+
+.quicklinks{
+    gap: 20px;
+}
+
+.quicklinks_wrapper {
+    border-right: 1px solid white;
+    height: 100%;
+    background: #9376E0;
+}
+
+.admin-card{
+    height: 750px;
+    overflow-y: scroll;
+}
+
+.admin-row{
+    height: 100%;
+}
+
+.col-md-8 {
+    background: #F3BCC8;
+}
+
+.cardforms {
+    background: #c5e0b4;
+}
+
+.list-group-item {
+    background: #E893CF;
+}
+
+.btns {
+    margin-top: 30px;
+    text-align: center;
+}

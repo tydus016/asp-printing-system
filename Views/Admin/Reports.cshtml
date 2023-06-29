@@ -1,0 +1,65 @@
+﻿@model List<printingsystem.Models.Prints.Prints>
+@{
+    ViewData["Title"] = "Admin Panel";
+    Random rnd = new Random();
+}
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment
+
+<div class="card mb-3 admin-card">
+    <div class="row g-0 admin-row">
+        <div class="col-md-4 quicklinks_wrapper">
+            <ul class="list-group text-center quicklinks">
+                <li class="list-group-item text-uppercase">
+                    <a asp-controller="Admin" asp-action="Index" class="h5 text-dark">Dashboard</a>
+                </li>
+                <li class="list-group-item text-uppercase">
+                    <a asp-controller="Admin" asp-action="print" class="h5 text-dark">
+                        Print Anywhere
+                    </a>
+                </li>
+                <li class="list-group-item text-uppercase">
+                    <a asp-controller="Admin" asp-action="Reports" class="h5 text-dark">Reports</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Paper</th>
+                            <th>Total Use</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>SCRATCH PAPER (SHORT)</td>
+                                <td class="sp-short">@rnd.Next(0, 15)</td>
+                            </tr>
+                        <tr>
+                            <td>SCRATCH PAPER (LONG)</td>
+                            <td class="sp-long">@rnd.Next(0, 15)</td>
+                        </tr>
+                        <tr>
+                            <td>NEWS PRINT (LONG)</td>
+                            <td class="np-long">@rnd.Next(0, 15)</td>
+                        </tr>
+                        <tr>
+                            <td>NEWS PRINT (SHORT)</td>
+                            <td class="np-short">@rnd.Next(0, 15)</td>
+                        </tr>
+                        <tr>
+                            <td>BONDPAPER WHITE-SUBSTANCE 16 (LONG)</td>
+                            <td class="ws-long">@rnd.Next(0, 15)</td>
+                        </tr>
+                        <tr>
+                            <td>BONDPAPER WHITE-SUBSTANCE 16 (SHORT)</td>
+                            <td class="ws-short">@rnd.Next(0, 15)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

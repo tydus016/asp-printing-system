@@ -1,0 +1,66 @@
+﻿@model List<printingsystem.Models.Prints.Prints>
+@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<div class="card mb-3 admin-card">
+    <div class="row g-0 admin-row">
+        <div class="col-md-4 quicklinks_wrapper">
+            <ul class="list-group text-center quicklinks">
+                <li class="list-group-item text-uppercase">
+                    <a asp-controller="Admin" asp-action="Index" class="h5 text-dark">Dashboard</a>
+                </li>
+                <li class="list-group-item text-uppercase">
+                    <a asp-controller="Admin" asp-action="print" class="h5 text-dark">
+                        Print Anywhere
+                    </a>
+                </li>
+                <li class="list-group-item text-uppercase">
+                    <a asp-controller="Admin" asp-action="Reports" class="h5 text-dark">Reports</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h4 class="card-title text-center text-uppercase">Dashboard</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Details</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var data in Model)
+                        {
+                            <tr>
+                                <td>@data.files</td>
+                                <td>
+                                    Pg No.:@data.no_of_pages<br>
+                                    No. Of copies:@data.no_of_copies<br>
+                                    Type of paper:@data.type_of_paper<br>
+                                    Printer name:@data.printer_name<br>
+                                    Note:<span class="text-danger">@data.notes</span>
+                                </td>
+                                <td style="width: 200px" class="text-center m-1">
+                                    <select class="form-select chnage-status" data-id="@data.id" name="status">
+                                        @if(data.status == 1)
+                                        {
+                                            <option value="0">Pending</option>
+                                            <option value="1" selected>For Pickup</option>
+                                        }else{
+                                            <option value="0" selected>Pending</option>
+                                            <option value="1">For Pickup</option>
+                                        }
+                                    </select><br>
+                                    <button class="btn btn-primary text-uppercase mark-as-done" data-id="@data.id">mark as done</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

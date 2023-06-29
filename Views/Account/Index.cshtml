@@ -1,0 +1,21 @@
+﻿@model printingsystem.Models.UsersModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+<div class="card">
+    <div class="card-body cardforms">
+        <h4 class="card-title text-center fw-bold">Login Page</h4>
+        <form class="ccsform" action="account/login" method="post">
+            <div class="mb-3">
+                <label for="firstname" class="form-label">First Name</label>
+                <input type="email" class="form-control" id="firstname" asp-for="email">
+            </div>
+            <div class="mb-3">
+                <label for="lastname" class="form-label">Last Name</label>
+                <input type="password" class="form-control" id="lastname" asp-for="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+﻿@model printingsystem.Models.FilesModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="card mb-3 admin-card">
+    <div class="row g-0 admin-row">
+        <div class="col-md-4 quicklinks_wrapper">
+            <ul class="list-group text-center quicklinks">
+                <li class="list-group-item text-uppercase">
+                    <a asp-controller="Home" asp-action="Dashboard" class="h5 text-dark">Dashboard</a>
+                </li>
+                <li class="list-group-item text-uppercase">
+                    <a asp-controller="Home" asp-action="Index" class="h5 text-dark">
+                        Print Anywhere
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8 p-2">
+            <div class="card-body"> 
+                <h4 class="card-title text-center text-uppercase">
+                    Print Anywhere
+                </h4>
+            </div>
+            <form class="ccsform" action="home/UploadFiles" method="post" enctype="multipart/form-data">
+                <div class="formarea">
+                    <div class="mb-3 row">
+                        <div class="col-9">
+                            <label for="files" class="form-label">file Name</label>
+                            <input type="file" class="form-control pdf-file-input" id="files" name="files" accept="application/pdf" multiple />
+                        </div>
+                        <div class="col-3 btns">
+                            <button class="btn btn-success btn-md btn-add" type="button">Add</button>
+                            @*<button class="btn btn-danger btn-md btn-remove" type="button">Remove</button>*@
+                        </div>
+                        <div class="col-4">
+                            <label for="no_of_copies" class="form-label">No. of Copies</label>
+                            <input type="number" class="form-control" id="no_of_copies" name="no_of_copies[]" />
+                        </div>
+                        <div class="col-4">
+                            <label for="no_of_copies" class="form-label">Type of Paper</label>
+                            <select class="form-select" name="type_of_paper[]">
+                                <option selected>Type of Paper</option>
+                                <option value="Scratch Paper (short)">Scratch Paper (short)</option>
+                                <option value="Scratch Paper (long)">Scratch Paper (long)</option>
+                                <option value="News Print (long)">News Print (long)</option>
+                                <option value="News Print (short)">News Print (short)</option>
+                                <option value="BONDPAPER WHITE-SUBSTANCE 16 (LONG)">BONDPAPER WHITE-SUBSTANCE 16 (LONG)</option>
+                                <option value="BONDPAPER WHITE-SUBSTANCE 16 (SHORT)">BONDPAPER WHITE-SUBSTANCE 16 (SHORT)</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label for="no_of_copies" class="form-label">Printer Name</label>
+                            <select class="form-select" name="printer_name[]">
+                                <option selected>Printer Name</option>
+                                <option value="Standard">Standard</option>
+                                <option value="Basic">Basic</option>
+                            </select>
+                        </div>
+                        <div class="col-12" id="notes-area">
+                            <label for="notes">Notes</label>
+                            <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+@*                <div class="mb-3">
+                    <label for="user_id" class="form-label">id number</label>
+                    <input type="number" class="form-control" id="user_id" name="user_id">
+                </div>
+                <div class="mb-3">
+                    <label for="files" class="form-label">file</label>
+                    <input type="file" class="form-control" id="files" name="files" accept="application/pdf" multiple />
+                </div>
+                <div class="mb-3">
+                    <label for="copies" class="form-label">number of copies</label>
+                    <input type="number" class="form-control" id="copies" name="copies">
+                </div>
+                <div class="mb-3">
+                    <select class="form-select" aria-label="default select example" name="paper_type">
+                        <option selected>select paper type</option>
+                        <option value="bondpaper a4">bondpaper a4</option>
+                        <option value="long">long</option>
+                        <option value="short">short</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <select class="form-select" aria-label="default select example" name="printer">
+                        <option selected>printer name</option>
+                        <option value="admin">admin</option>
+                        <option value="college">college</option>
+                        <option value="basic">basic</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="copies" class="form-label">notes</label>
+                    <input type="text" class="form-control" id="copies" name="notes">
+                </div>*@
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary submit-btn">Upload PDF Document</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

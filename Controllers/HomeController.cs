@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using MySqlX.XDevAPI.Common;
 using printingsystem.Data;
 using printingsystem.Models;
 using printingsystem.Models.Files;
+using printingsystem.Models.Papers;
 using printingsystem.Models.Prints;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -65,6 +68,31 @@ namespace printingsystem.Controllers
             return RedirectToAction("Index");
         }
 
+
+        private void insertPapers(string paper_name, int count)
+        {
+            for(int i = 0; i <= count - 1; i++)
+            {
+                try
+                {
+                    string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+                    var filesEntity = new Papers()
+                    {
+                        paper_id = Guid.NewGuid(),
+                        paper_name = paper_name,
+                        date = currentDate,
+                    };
+
+                    _context.papers.Add(filesEntity);
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    // Handle or log the exception
+                }
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddPrints(List<IFormFile> files, int[] paper_count, int[] no_of_copies, string[] type_of_paper, string[] printer_name, string notes)
         {
@@ -93,7 +121,7 @@ namespace printingsystem.Controllers
                         files = fileName,
                         notes = notes,
                     };
-
+                    insertPapers(type_of_paper[i], no_of_copies[i]);
                     _context.prints.Add(filesEntity);
                     i++;
                 }

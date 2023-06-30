@@ -24,7 +24,9 @@ namespace printingsystem.Controllers
 
         public async Task<IActionResult> Print()
         {
-            var data = await _context.prints.Where(x => x.status == 1 || x.status == 0).ToListAsync();
+            var data = await _context.prints
+                .Where(x => x.status == 1 || x.status == 0)
+                .ToListAsync();
 
             return View(data);
         }
@@ -85,5 +87,49 @@ namespace printingsystem.Controllers
             // If the existing row is not found, return an error response
             return Json(new { status = true, message = "Updated successfully" });
         }
+
+        public async Task<IActionResult> Papers()
+        {
+            //var data = await _context.papers.ToListAsync();
+
+            var data = await _context.papers
+                .GroupBy(y => y.date) // Replace 'ColumnName' with the actual column name
+                .Select(g => new
+                {
+                    date = g.Key,
+                    Count = g.Count(),
+                    // Other properties you want to select
+                })
+            .OrderByDescending(g => g.date)
+            .ToListAsync();
+
+            return Json(data);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ViewPaper(string id)
+        {
+            //var data = await _context.papers.ToListAsync();
+
+            var data = await _context.papers
+                .Where(x => x.date == id)
+                .GroupBy(y => y.paper_name) // Replace 'ColumnName' with the actual column name
+                .Select(g => new
+                {
+                    paper_name = g.Key,
+                    Count = g.Count(),
+                    // Other properties you want to select
+                })
+            .OrderByDescending(g => g.paper_name)
+            .ToListAsync();
+
+            return Json(data);
+        }
+
+        public IActionResult Paper()
+        {
+            return View();
+        }
+
     }
 }

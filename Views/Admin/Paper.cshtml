@@ -1,7 +1,5 @@
-﻿@model List<printingsystem.Models.Prints.Prints>
-@{
+﻿@{
     ViewData["Title"] = "Admin Panel";
-    Random rnd = new Random();
 }
 @inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment
 
@@ -24,16 +22,18 @@
         </div>
         <div class="col-md-8">
             <div class="card-body">
+                <h4 class="card-title text-center text-uppercase">Print anywhere</h4>
+
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Date</th>
+                            <th>Paper Type</th>
+                            <th>Papers Used</th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody id="reports-tbl">
-                        <tr>
-                            <td>BONDPAPER WHITE-SUBSTANCE 16 (SHORT)</td>
-                        </tr>
+                    <tbody id="papercounts">
+
                     </tbody>
                 </table>
             </div>

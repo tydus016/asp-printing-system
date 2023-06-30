@@ -6,6 +6,8 @@ $(document).ready(function () {
 
     set_papers()
     populate_papers()
+    setReportsTable()
+    setPaperView()
         $(document).on('change', 'input[name="files"]', function () {
         var file = $(this).prop('files')[0];
         var allowedExtensions = /(\.pdf)$/i;
@@ -15,7 +17,8 @@ $(document).ready(function () {
             alert('Please select a PDF file.')
         } else {
         }
-    });
+        });
+
 });
 
 
@@ -59,13 +62,13 @@ $(document).on('submit', '.ccsform', function (e) {
                     // All files have been processed, proceed with AJAX request
                     ajax(data, 'home/AddPrints').then(res => {
                         $.each(type_of_paper, function (key, res) {
-                            console.log('asd');
                             set_paper_count(res.value);
                         });
                         self[0].reset();
+                        alert(res.message);
                         setTimeout(() => {
-                            alert(res.message);
-                        }, 1500);
+                            location.replace('/Home/Dashboard')
+                        }, 2000)
                     });
                 }
             });
@@ -79,6 +82,7 @@ $(document).on('submit', '.ccsform', function (e) {
         var file = fileInputs[i].files[0];
         processFile(file);
     }
+
 });
 
 
@@ -166,6 +170,60 @@ const set_papers = () => {
         localStorage.setItem('ws-short', 0)
         localStorage.setItem('ws-long', 0)
     }
+}
+
+const setReportsTable = async () => {
+    const table = $('#reports-tbl')
+    table.html('')
+    const data = await ajax('', '/admin/papers')
+    if (data) {
+        let str = ''
+        $.each(data, function (key, val) {
+            str = `<tr>
+                      <td><a href="/admin/paper/${val.date}">${val.date}</a></td>
+                   </tr>`
+            table.append(str)
+
+        })
+    }
+}
+
+const setPaperView = async () => {
+    var url = window.location.href;
+    var date = url.split('/').pop();
+    console.log(typeof date)
+    const table = $('#papercounts')
+    table.html('')
+    const data = await getajax('/admin/ViewPaper/' + date)
+    console.log('data', data)
+
+    if (data) {
+        let str = ''
+        $.each(data, function (key, val) {
+            str = `<tr>
+                      <td>${val.paper_name}</td>
+                      <td>${val.count}</td>
+                   </tr>`
+            table.append(str)
+        })
+    }
+
+}
+
+const getajax = (url) => {
+    return $.ajax({
+        url: url,
+        type: "get",
+        dataType: "json",
+        async: true,
+        cache: false,
+        success: function (res) {
+            return res;
+        },
+        error: function (err) {
+            return err;
+        },
+    });
 }
 
 
